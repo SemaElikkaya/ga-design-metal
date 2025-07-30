@@ -7,6 +7,8 @@
   <title>GA Design Metal</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" href="assets/images/logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -18,13 +20,32 @@
     </a>
     <ul class="nav-links">
       <li><a href="#about">Hakkımızda</a></li>
-      <li><a href="#works">Çalışmalarımız</a></li>
+      <li><a href="#products">Ürünlerimiz</a></li>
+      <li><a href="#gallery">Galeri</a></li>
       <li><a href="#contact">İletişim</a></li>
     </ul>
   </nav>
 
   <!-- GİRİŞ BÖLÜMÜ (HEADER) -->
   <section id="hero-section">
+    <!-- <div class="hero-container">
+    <img src="assets/images/ga-design.jpg" alt="Design Metal Hero Görseli" class="hero-bg">
+
+    <div class="hero-overlay">
+      <div class="pad">
+        <h3>Estetik Tasarım</h3>
+        <p>Modern çizgilerle şekillendirilmiş zarif metal işçilik.</p>
+      </div>
+      <div class="pad">
+        <h3>Endüstriyel Güç</h3>
+        <p>Ağır koşullara dayanıklı, yüksek mukavemetli üretim.</p>
+      </div>
+      <div class="pad">
+        <h3>Özel Üretim</h3>
+        <p>İhtiyacınıza özel ölçü ve tasarım çözümleri.</p>
+      </div>
+    </div>
+  </div> -->
     <div class="slider-container">
       <div class="slides-wrapper">
         <div class="slide active" style="background-image: url('assets/images/ga1.jpg')">
@@ -46,10 +67,6 @@
       <button class="arrow left">&#10094;</button>
       <button class="arrow right">&#10095;</button>
     </div>
-    <div class="hero-text">
-      <p>Yenilikçi tasarımlarımızla metalin gücünü ve estetiğini bir araya getiriyor, özgün çözümlerle dayanıklılığı en
-        üst seviyeye taşıyoruz.</p>
-    </div>
   </section>
 
   <!-- ANA İÇERİK -->
@@ -62,29 +79,64 @@
       </p>
     </section>
 
-    <section id="works" class="gallery">
-      <h2>Çalışmalarımız</h2>
+    <section id="products">
+      <h2>Ürünlerimiz</h2>
       <p>
         Estetik ve dayanıklı metal ürünlerimizin örneklerini burada görebilirsiniz.
         Toptan ve perakende satış seçeneklerimizle her ihtiyaca uygun çözümler sunuyoruz.
       </p>
+    </section>
+
+    <section id="gallery" class="catalog">
+      <h2>Galeri</h2>
       <div class="slider-placeholder">Instagram Slider Coming Soon...</div>
     </section>
 
     <section id="contact" class="contact-section">
-      <div class="contact-info">
-        <h2>İletişim</h2>
-        <p>Bize ulaşmak için aşağıdaki haritayı kullanabilirsiniz.</p>
-        <p>Adres: Örnek Cad. No:123, Bolu</p>
-        <p>Telefon: +90 123 456 7890</p>
-      </div>
-      <div class="contact-map">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.0594192128747!2d31.625765975979885!3d40.73871803597948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x409d3f4f94581f05%3A0x6b3417dff68bb14!2sGA%20DES%C4%B0GN%20METAL!5e0!3m2!1str!2str!4v1753725338564!5m2!1str!2str"
-          width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="contact-content">
+        <div class="contact-info">
+          <h2>İletişim</h2>
+          <p>Bize ulaşmak için aşağıdaki iletişim bilgilerini ya da haritayı kullanabilirsiniz.</p>
+
+          <div class="contact-item">
+            <a href="https://maps.app.goo.gl/Paf75XbBazsD2cW5A" target="_blank">
+              <span class="material-symbols-outlined">location_on</span>
+            </a>
+            <p>GA METAL DESİGN, Aşağısoku, Mobilyacılar Sk. NO:13/1, 14200 Bolu Merkez/Bolu</p>
+          </div>
+
+          <div class="contact-item">
+            <a href="tel:+90 545 545 90 51">
+              <span class="material-symbols-outlined">call</span>
+            </a>
+            <p>+90 545 545 90 51</p>
+          </div>
+
+          <div class="contact-item">
+            <a href="">
+              <span class="material-symbols-outlined">mail</span>
+            </a>
+            <p>info@gadesignmetal.com</p>
+          </div>
+
+          <!-- Instagram ikonu iletişim bilgileri altına eklendi -->
+          <div class="social-media">
+            <a href="https://www.instagram.com/ga_designmetal" target="_blank" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+              <!-- <p>Instagram</p> -->
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.0594192128747!2d31.625765975979885!3d40.73871803597948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x409d3f4f94581f05%3A0x6b3417dff68bb14!2sGA%20DES%C4%B0GN%20METAL!5e0!3m2!1str!2str!4v1753725338564!5m2!1str!2str"
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </div>
     </section>
+
 
   </main>
 

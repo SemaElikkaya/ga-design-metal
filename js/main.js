@@ -104,11 +104,11 @@ leftArrow.addEventListener("click", goToPreviousSlide);
 rightArrow.addEventListener("click", goToNextSlide);
 
 // Otomatik kaydırma (her 6 saniyede bir)
-setInterval(() => {
-  if (!isTransitioning) {
-    showSlide(currentIndex + 1);
-  }
-}, 6000);
+// setInterval(() => {
+//   if (!isTransitioning) {
+//     showSlide(currentIndex + 1);
+//   }
+// }, 8000);
 
 // İlk slaytı göster
 showSlide(currentIndex);
