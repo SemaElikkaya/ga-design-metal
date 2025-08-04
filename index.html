@@ -18,13 +18,24 @@
     <a href="#hero-section" class="logo-link">
       <img src="assets/images/logo.png" alt="GA Design Metal Logo" class="logo" />
     </a>
-    <ul class="nav-links">
+
+    <div class="hamburger-wrapper" id="hamburger">
+      <h2 class="hamburger-label">Menü</h2>
+      <div class="hamburger-lines">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
       <li><a href="#about">Hakkımızda</a></li>
       <li><a href="#products">Ürünlerimiz</a></li>
       <li><a href="#gallery">Galeri</a></li>
       <li><a href="#contact">İletişim</a></li>
     </ul>
   </nav>
+
 
   <!-- GİRİŞ BÖLÜMÜ (HEADER) -->
   <section id="hero-section">
@@ -50,6 +61,7 @@
       <div class="slides-wrapper">
         <div class="slide active" style="background-image: url('assets/images/ga1.jpg')">
           <div class="slider-overlay">
+            <h2>GA Design Metal</h2>
             <p>Metal Tasarımda Uzmanlık</p>
           </div>
         </div>
@@ -91,52 +103,64 @@
       <h2>Galeri</h2>
       <div class="slider-placeholder">Instagram Slider Coming Soon...</div>
     </section>
-
+    <!-- <h2 class="contact-title">İletişim</h2> -->
     <section id="contact" class="contact-section">
+
       <div class="contact-content">
-        <div class="contact-info">
-          <h2>İletişim</h2>
-          <p>Bize ulaşmak için aşağıdaki iletişim bilgilerini ya da haritayı kullanabilirsiniz.</p>
 
-          <div class="contact-item">
-            <a href="https://maps.app.goo.gl/Paf75XbBazsD2cW5A" target="_blank">
-              <span class="material-symbols-outlined">location_on</span>
-            </a>
-            <p>GA METAL DESİGN, Aşağısoku, Mobilyacılar Sk. NO:13/1, 14200 Bolu Merkez/Bolu</p>
-          </div>
+        <!-- Sol: Form Alanı -->
+        <div class="contact-form">
+          <h2>Bize Yazın</h2>
+          <form action="#" method="post">
+            <input type="text" name="adsoyad" placeholder="Ad Soyad" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="konu" placeholder="Konu">
+            <textarea name="mesaj" placeholder="Mesaj" rows="5" required></textarea>
+            <button type="submit">Gönder</button>
+          </form>
 
-          <div class="contact-item">
-            <a href="tel:+90 545 545 90 51">
-              <span class="material-symbols-outlined">call</span>
-            </a>
-            <p>+90 545 545 90 51</p>
-          </div>
-
-          <div class="contact-item">
-            <a href="">
-              <span class="material-symbols-outlined">mail</span>
-            </a>
-            <p>info@gadesignmetal.com</p>
-          </div>
-
-          <!-- Instagram ikonu iletişim bilgileri altına eklendi -->
-          <div class="social-media">
-            <a href="https://www.instagram.com/ga_designmetal" target="_blank" aria-label="Instagram">
-              <i class="fab fa-instagram"></i>
-              <!-- <p>Instagram</p> -->
-            </a>
-          </div>
         </div>
 
-        <div class="contact-map">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.0594192128747!2d31.625765975979885!3d40.73871803597948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x409d3f4f94581f05%3A0x6b3417dff68bb14!2sGA%20DES%C4%B0GN%20METAL!5e0!3m2!1str!2str!4v1753725338564!5m2!1str!2str"
-            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <!-- Sağ: İletişim Bilgileri + Harita -->
+        <div class="contact-info-map">
+          <div class="contact-info">
+            <h2>Bize Ulaşın</h2>
+            <p>Bize ulaşmak için aşağıdaki iletişim bilgilerini kullanabilirsiniz.</p>
+            <div class="contact-item">
+              <a href="tel:+90 545 545 90 51">
+                <span class="material-symbols-outlined">call</span>
+              </a>
+              <p>+90 545 545 90 51</p>
+            </div>
+
+            <div class="contact-item">
+              <a href="mailto:gadesignmetal@gmail.com?subject=İletişim Talebi&body=Merhaba, size ulaşmak istiyorum.">
+                <span class="material-symbols-outlined">mail</span>
+              </a>
+              <p>info@gadesignmetal.com</p>
+            </div>
+            <div class="social-media">
+              <a href="https://www.instagram.com/ga_designmetal" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <span>@ga_designmetal</span>
+            </div>
+            <div class="contact-item">
+              <a href="https://maps.app.goo.gl/Paf75XbBazsD2cW5A" target="_blank">
+                <span class="material-symbols-outlined">location_on</span>
+              </a>
+              <p>GA METAL DESİGN, Aşağısoku, Mobilyacılar Sk. NO:13/1, 14200 Bolu Merkez/Bolu</p>
+            </div>
+            <div class="contact-map">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.0594192128747!2d31.625765975979885!3d40.73871803597948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x409d3f4f94581f05%3A0x6b3417dff68bb14!2sGA%20DES%C4%B0GN%20METAL!5e0!3m2!1str!2str!4v1753725338564!5m2!1str!2str"
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-
 
   </main>
 

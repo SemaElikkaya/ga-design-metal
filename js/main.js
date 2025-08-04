@@ -112,3 +112,36 @@ rightArrow.addEventListener("click", goToNextSlide);
 
 // İlk slaytı göster
 showSlide(currentIndex);
+
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger'); // wrapper
+  const navLinks = document.getElementById('navLinks');
+  const navItems = document.querySelectorAll('#navLinks a');
+
+  // Hamburger'a tıklayınca menü aç/kapa ve border aktifliği değiştir
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navLinks.classList.toggle('show');
+    hamburger.classList.toggle('active');
+  });
+
+  // Menüde bir linke tıklanırsa menü kapanır ve active class kalkar
+  navItems.forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('show');
+      hamburger.classList.remove('active');
+    });
+  });
+
+  // Sayfanın boş bir yerine tıklanırsa menü kapanır ve active class kalkar
+  document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+      navLinks.classList.remove('show');
+      hamburger.classList.remove('active');
+    }
+  });
+});
+
+
+
+
