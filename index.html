@@ -59,7 +59,7 @@
   </div> -->
     <div class="slider-container">
       <div class="slides-wrapper">
-        <div class="slide active" style="background-image: url('assets/images/ga1.jpg')">
+        <div class="slide active" style="background-image: url('assets/images/post2.jpg')">
           <div class="slider-overlay">
             <h2>GA Design Metal</h2>
             <p>Metal Tasarımda Uzmanlık</p>
@@ -100,9 +100,62 @@
     </section>
 
     <section id="gallery" class="catalog">
-      <h2>Galeri</h2>
-      <div class="slider-placeholder">Instagram Slider Coming Soon...</div>
+      <h2 id="gallery-header">Galeri</h2>
+      <p class="gallery-intro">
+        Atölyemizden kareler, ürün detayları ve üretim sürecinden bazı anları bu alanda keşfedebilirsiniz.
+      </p>
+      <div class="gallery-grid">
+        <!-- Görsel -->
+        <img src="assets/images/post1.jpg" alt="Fotoğraf 1" class="gallery-item" data-category="uretim" />
+
+        <!-- Video -->
+        <video class="gallery-item" data-category="video" muted playsinline>
+          <source src="assets/videos/video1.mp4" type="video/mp4" />
+        </video>
+
+        <!-- Başka bir görsel -->
+        <img src="assets/images/post2.jpg" alt="Fotoğraf 2" class="gallery-item" data-category="atolye" />
+
+        <!-- Başka bir video -->
+        <video class="gallery-item" data-category="video" muted playsinline>
+          <source src="assets/videos/video2.mp4" type="video/mp4" />
+        </video>
+
+        <!-- Tekrarlar -->
+        <img src="assets/images/post3.jpg" alt="Fotoğraf 3" class="gallery-item" data-category="uretim" />
+
+        <video class="gallery-item" muted playsinline>
+          <source src="assets/videos/video1.mp4" type="video/mp4" />
+        </video>
+
+        <img src="assets/images/post2.jpg" alt="Fotoğraf 4" class="gallery-item" data-category="atolye" />
+        <img src="assets/images/ga3.jpg" alt="Fotoğraf 5" class="gallery-item" data-category="uretim" />
+        <img src="assets/images/ga1.jpg" alt="Fotoğraf 6" class="gallery-item" data-category="atolye" />
+        <img src="assets/images/ga1.jpg" alt="Fotoğraf 4" class="gallery-item" data-category="atolye" />
+        <img src="assets/images/ga3.jpg" alt="Fotoğraf 5" class="gallery-item" data-category="uretim" />
+
+
+        <video class="gallery-item" data-category="video" muted playsinline>
+          <source src="assets/videos/video2.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="gallery-filters">
+        <div class="filter-slider"></div> <!-- Animasyonlu kayan kutu -->
+        <button class="filter-btn active" data-filter="all">Tümü</button>
+        <button class="filter-btn" data-filter="uretim">Üretim</button>
+        <button class="filter-btn" data-filter="atolye">Atölye</button>
+        <button class="filter-btn" data-filter="video">Videolar</button>
+      </div>
     </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox hidden">
+      <span class="close">&times;</span>
+      <button class="lightbox-arrow left ">&#10094;</button>
+      <div class="lightbox-content"></div>
+      <button class="lightbox-arrow right hidden">&#10095;</button>
+    </div>
+
     <!-- <h2 class="contact-title">İletişim</h2> -->
     <section id="contact" class="contact-section">
 
