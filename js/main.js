@@ -17,7 +17,7 @@ window.addEventListener("scroll", () => {
 
 // === Aktif Link Takibi ===
 const sections = document.querySelectorAll("section[id]");
-const navLinks = document.querySelectorAll(".nav-links a");
+// const navLinks = document.querySelectorAll(".nav-links a");
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -95,32 +95,66 @@ showSlide(currentIndex);
 // === Hamburger Menü ===
 document.addEventListener('DOMContentLoaded', () => {
   const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-  const navItems = document.querySelectorAll('#navLinks a');
+  const navLinksContainer = document.getElementById('navLinks');
+  const navLinks = document.querySelectorAll('#navLinks a');
+  const sections = [];
 
+  // Menü linklerine karşılık gelen bölümleri alıyoruz
+  navLinks.forEach(link => {
+    const section = document.querySelector(link.getAttribute('href'));
+    if (section) {
+      sections.push({
+        id: link.getAttribute('href'),
+        section: section
+      });
+    }
+  });
+
+  // Hamburger menü aç/kapa
   hamburger?.addEventListener('click', (e) => {
     e.stopPropagation();
-    navLinks.classList.toggle('show');
+    navLinksContainer.classList.toggle('show');
     hamburger.classList.toggle('active');
   });
 
-  navItems.forEach(link => {
+  // Menüdeki linklere tıklanınca menü kapanır ve aktif link güncellenir
+  navLinks.forEach(link => {
     link.addEventListener('click', () => {
-      navLinks.classList.remove('show');
+      navLinksContainer.classList.remove('show');
       hamburger.classList.remove('active');
+      navLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
     });
   });
 
+  // Menü dışına tıklanınca menü kapanır
   document.addEventListener('click', (e) => {
-    if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-      navLinks.classList.remove('show');
+    if (!hamburger.contains(e.target) && !navLinksContainer.contains(e.target)) {
+      navLinksContainer.classList.remove('show');
       hamburger.classList.remove('active');
+    }
+  });
+
+  // Scroll spy: scroll pozisyonuna göre aktif linki güncelle
+  window.addEventListener('scroll', () => {
+    let scrollPosition = window.scrollY + 400; // Navbar yüksekliği kadar offset
+
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const secTop = sections[i].section.offsetTop;
+      console.log(secTop);
+
+      if (scrollPosition >= secTop) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const activeLink = document.querySelector(`a[href="${sections[i].id}"]`);
+        if (activeLink) activeLink.classList.add('active');
+        break;
+      }
     }
   });
 });
 
 // === Galeri Lightbox + Oklarla Geçiş ===
-const items = Array.from(document.querySelectorAll('.gallery-item'));
+const items = Array.from(document.querySelectorAll('.gallery-item-wrapper'));
 const lightbox = document.getElementById('lightbox');
 const lightboxContent = document.querySelector('.lightbox-content');
 const closeBtn = document.querySelector('.close');
@@ -129,18 +163,41 @@ const rightBtn = document.querySelector('.lightbox-arrow.right');
 
 let currentMediaIndex = -1;
 
+function getVisibleItems() {
+  return items.filter(item => {
+    if (item.style.display === 'none') return false;
+    // Eğer filtre "all" ise sadece img içerenleri al
+    const activeFilterBtn = document.querySelector('.filter-btn.active');
+    if (!activeFilterBtn) return true;
+    const filter = activeFilterBtn.getAttribute('data-filter');
+
+    const media = item.querySelector('.gallery-item');
+
+    if (filter === 'all' && media.tagName !== 'IMG') {
+      return false;
+    }
+    // Diğer filtrelerde normal davranış
+    return true;
+  });
+}
+
+let visibleItems = getVisibleItems();
+
 function updateLightbox(index) {
   currentMediaIndex = index;
   lightboxContent.innerHTML = "";
 
-  const item = items[index];
+  const item = visibleItems[index];
+  if (!item) return;
 
-  if (item.tagName === "IMG") {
+  const media = item.querySelector('.gallery-item');
+
+  if (media.tagName === "IMG") {
     const img = document.createElement("img");
-    img.src = item.src;
+    img.src = media.src;
     lightboxContent.appendChild(img);
-  } else if (item.tagName === "VIDEO") {
-    const source = item.querySelector("source");
+  } else if (media.tagName === "VIDEO") {
+    const source = media.querySelector("source");
     if (source) {
       const video = document.createElement("video");
       video.src = source.src;
@@ -153,13 +210,19 @@ function updateLightbox(index) {
   }
 
   leftBtn.classList.toggle('hidden', index === 0);
-  rightBtn.classList.toggle('hidden', index === items.length - 1);
+  rightBtn.classList.toggle('hidden', index === visibleItems.length - 1);
 }
 
+// Wrapperlar için tıklama event'i:
 items.forEach((item, i) => {
   item.addEventListener('click', () => {
+    visibleItems = getVisibleItems(); // o an görünür olanları al
+    const visibleIndex = visibleItems.indexOf(item);
+
+    if (visibleIndex === -1) return;
+
     lightbox.classList.remove('hidden');
-    updateLightbox(i);
+    updateLightbox(visibleIndex);
   });
 });
 
@@ -184,14 +247,16 @@ leftBtn?.addEventListener('click', (e) => {
 
 rightBtn?.addEventListener('click', (e) => {
   e.stopPropagation();
-  if (currentMediaIndex < items.length - 1) {
+  if (currentMediaIndex < visibleItems.length - 1) {
     updateLightbox(currentMediaIndex + 1);
   }
 });
 
+visibleItems = getVisibleItems();
+
 // === Filtreleme ve Slider ===
 const filterBtns = document.querySelectorAll('.filter-btn');
-const galleryItems = document.querySelectorAll('.gallery-item');
+const galleryItems = document.querySelectorAll('.gallery-item-wrapper'); // sadece wrapper'lar
 const slider = document.querySelector('.filter-slider');
 
 function moveSlider(button) {
@@ -210,8 +275,12 @@ window.addEventListener('DOMContentLoaded', () => {
     moveSlider(allBtn);
   }
 
+  // Başlangıçta filtre butonları gizli
+  filterButtons.classList.remove('visible');
+
   galleryItems.forEach(item => {
-    if (item.tagName === 'IMG') {
+    const media = item.querySelector('.gallery-item');
+    if (media && media.tagName === 'IMG') {
       item.style.display = 'block';
     } else {
       item.style.display = 'none';
@@ -226,17 +295,20 @@ filterBtns.forEach(btn => {
     moveSlider(btn);
 
     const filter = btn.getAttribute('data-filter');
+
     galleryItems.forEach(item => {
+      const media = item.querySelector('.gallery-item');
       const cat = item.getAttribute('data-category');
 
       if (filter === 'all') {
-        if (item.tagName === 'IMG') {
+        // sadece img'ler
+        if (media && media.tagName === 'IMG') {
           item.style.display = 'block';
         } else {
           item.style.display = 'none';
         }
       } else if (filter === 'video') {
-        if (item.tagName === 'VIDEO') {
+        if (media && media.tagName === 'VIDEO') {
           item.style.display = 'block';
         } else {
           item.style.display = 'none';
@@ -257,39 +329,173 @@ const filterBtnsContainer = document.querySelector('.gallery-filters');
 const gallerySection = document.getElementById('gallery');
 const contactSection = document.getElementById('contact');
 
-const navbarHeight = 74.5; // navbar yüksekliğin
+const navbarHeight = 74.5; // navbar yüksekliği
 
 let galleryVisible = false;
 let contactVisible = false;
 
-function updateButtonVisibility() {
-  if (galleryVisible && !contactVisible) {
-    filterBtnsContainer.classList.add('visible');
-  } else {
-    filterBtnsContainer.classList.remove('visible');
+// function updateButtonVisibility() {
+//   if (galleryVisible && !contactVisible) {
+//     filterBtnsContainer.classList.add('visible');
+//   } else {
+//     filterBtnsContainer.classList.remove('visible');
+//   }
+// }
+// silmelisin
+
+// const galleryObserver = new IntersectionObserver((entries) => {
+//   entries.forEach(entry => {
+//     galleryVisible = entry.isIntersecting;
+//     updateButtonVisibility();
+//   });
+// }, {
+//   root: null,
+//   rootMargin: `-${navbarHeight}px 0px 0px 0px`,
+//   threshold: 0.1,
+// });
+
+// const contactObserver = new IntersectionObserver((entries) => {
+//   entries.forEach(entry => {
+//     contactVisible = entry.isIntersecting;
+//     updateButtonVisibility();
+//   });
+// }, {
+//   root: null,
+//   threshold: 0.1,
+// });
+
+// if (gallerySection) galleryObserver.observe(gallerySection);
+// if (contactSection) contactObserver.observe(contactSection);
+
+window.addEventListener('resize', () => {
+  const activeBtn = document.querySelector('.filter-btn.active');
+  if (activeBtn) moveSlider(activeBtn);
+});
+
+
+// === "Daha Fazla" ve "Daha Az" Butonları ===
+const showMoreBtn = document.getElementById('show-more-btn');
+const showLessBtn = document.getElementById('show-less-btn');
+const filterButtons = document.getElementById('filter-buttons');
+const descriptionText = document.querySelector('.gallery-description');
+
+showMoreBtn.addEventListener('click', () => {
+  const hiddenItems = document.querySelectorAll('.gallery-item-wrapper.hidden');
+  hiddenItems.forEach(item => {
+    item.classList.remove('hidden'); // Tümünü kaldır — video dahil
+  });
+
+  filterButtons.classList.add('visible'); // SADECE burada görünür
+
+  if (descriptionText) {
+    descriptionText.textContent = 'Daha az görmek için butona tıklayın.';
+  }
+
+  // 'Tümü' butonunu aktif hale getir ve slider'ı kaydır
+  filterBtns.forEach(btn => btn.classList.remove('active'));
+  const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+  if (allBtn) {
+    allBtn.classList.add('active');
+    moveSlider(allBtn);
+  }
+
+  // 'Tümü' filtre davranışı (videolar hariç göster)
+  galleryItems.forEach(item => {
+    const media = item.querySelector('.gallery-item');
+    if (media && media.tagName === 'IMG') {
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none'; // videoları filtrelemede gizli tut
+    }
+  });
+
+  showMoreBtn.style.display = 'none';
+  showLessBtn.style.display = 'inline-block';
+});
+
+showLessBtn.addEventListener('click', () => {
+  galleryItems.forEach((item, index) => {
+    const media = item.querySelector('.gallery-item');
+    if (index < 6 && media && media.tagName === 'IMG') {
+      item.classList.remove('hidden');
+      item.style.display = 'block';
+    } else {
+      item.classList.add('hidden');
+      item.style.display = 'none';
+    }
+  });
+
+  filterButtons.classList.remove('visible');
+
+  // Tümü filtresini aktif hale getir
+  filterBtns.forEach(btn => btn.classList.remove('active'));
+  const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+  if (allBtn) {
+    allBtn.classList.add('active');
+    moveSlider(allBtn);
+  }
+
+  showMoreBtn.style.display = 'inline-block';
+  showLessBtn.style.display = 'none';
+
+  if (descriptionText) {
+    descriptionText.textContent = 'Galeriye göz atmak için aşağıdaki butona tıklayın.';
+  }
+});
+
+function resetGalleryView() {
+  galleryItems.forEach((item, index) => {
+    const media = item.querySelector('.gallery-item');
+    if (index < 6 && media && media.tagName === 'IMG') {
+      item.classList.remove('hidden');
+      item.style.display = 'block';
+    } else {
+      item.classList.add('hidden');
+      item.style.display = 'none';
+    }
+  });
+
+  filterButtons.classList.remove('visible');
+  showMoreBtn.style.display = 'inline-block';
+  showLessBtn.style.display = 'none';
+
+  if (descriptionText) {
+    descriptionText.textContent = 'Galeriye göz atmak için aşağıdaki butona tıklayın.';
   }
 }
 
-const galleryObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    galleryVisible = entry.isIntersecting;
-    updateButtonVisibility();
-  });
-}, {
-  root: null,
-  rootMargin: `-${navbarHeight}px 0px 0px 0px`,
-  threshold: 0.1,
+// === Scroll ile Galeriden Çıkınca Her Şeyi Sıfırla ===
+window.addEventListener('scroll', () => {
+  if (!filterButtons.classList.contains('visible')) return;
+
+  const rect = gallerySection.getBoundingClientRect();
+  const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+
+  if (!isInView) {
+    resetGalleryView();
+  }
 });
 
-const contactObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    contactVisible = entry.isIntersecting;
-    updateButtonVisibility();
+// === Navbar Linklerine ve Logoya Tıklanınca Her Şeyi Sıfırla ===
+const navLinksForFilterClose = document.querySelectorAll('nav a, .logo');
+navLinksForFilterClose.forEach(link => {
+  link.addEventListener('click', () => {
+    if (filterButtons.classList.contains('visible')) {
+      resetGalleryView();
+    }
   });
-}, {
-  root: null,
-  threshold: 0.1,
 });
 
-if (gallerySection) galleryObserver.observe(gallerySection);
-if (contactSection) contactObserver.observe(contactSection);
+new Swiper(".products-swiper", {
+  slidesPerView: 3,
+  spaceBetween: 20,
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  breakpoints: {
+    1024: { slidesPerView: 3 },
+    768: { slidesPerView: 2 },
+    0: { slidesPerView: 1.2 }
+  }
+});

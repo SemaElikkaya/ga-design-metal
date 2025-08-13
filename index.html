@@ -9,6 +9,7 @@
   <link rel="icon" href="assets/images/logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 
 <body>
@@ -67,11 +68,13 @@
         </div>
         <div class="slide" style="background-image: url('assets/images/ga2.jpg')">
           <div class="slider-overlay">
+            <h2>GA Design Metal</h2>
             <p> Özgün ve Fonksiyonel Çözümler</p>
           </div>
         </div>
         <div class="slide" style="background-image: url('assets/images/ga3.jpg')">
           <div class="slider-overlay">
+            <h2>GA Design Metal</h2>
             <p>Estetik & Dayanıklılık</p>
           </div>
         </div>
@@ -83,70 +86,195 @@
 
   <!-- ANA İÇERİK -->
   <main>
-    <section id="about">
-      <h2>Hakkımızda</h2>
-      <p>
-        GA Design Metal olarak, kişiye özel metal tasarım ve imalat hizmetleri sunuyoruz.
-        Yüksek kaliteli lazer kesim ve metal aksesuarlarla hayallerinizi gerçeğe dönüştürüyoruz.
-      </p>
+    <section id="about" class="about-section">
+      <h2 class="kicker">HAKKIMIZDA</h2>
+      <div class="about-inner">
+        <div class="about-text">
+          <h2>Alüminyum, Metal Tasarım ve İmalatta Uzman Çözümler</h2>
+          <p>
+            GA Design Metal olarak, kişiye özel metal tasarım ve imalat hizmetlerinde
+            estetik ve dayanıklılığı bir arada sunuyoruz. Lazer kesimden bitiş işlemine
+            kadar her aşamada yüksek kalite standartlarını uygular; projelerinizi
+            fikir aşamasından üretime taşıyoruz. Deneyimli ekip ve modern makinelerle
+            fonksiyonel ve uzun ömürlü ürünler tasarlıyoruz.
+          </p>
+
+          <p>
+            Projelerimiz hem endüstriyel hem de dekoratif çözümler içerir. Müşteri
+            memnuniyeti, tutarlılık ve detay odaklı üretim anlayışımızla sektörde
+            fark yaratıyoruz. Size özel çözümler ve sürdürülebilir yaklaşımlarımız
+            hakkında daha fazla bilgi almak isterseniz, her zaman iletişime geçebilirsiniz.
+          </p>
+        </div>
+
+        <div class="about-visual">
+          <img src="assets/images/about-foto.png" alt="GA Design Metal - Atölye Görseli">
+        </div>
+      </div>
     </section>
 
-    <section id="products">
-      <h2>Ürünlerimiz</h2>
-      <p>
-        Estetik ve dayanıklı metal ürünlerimizin örneklerini burada görebilirsiniz.
-        Toptan ve perakende satış seçeneklerimizle her ihtiyaca uygun çözümler sunuyoruz.
-      </p>
-    </section>
+
+
+
+  <section id="products" class="products-section">
+    <h2>Ürünlerimiz</h2>
+
+    <!-- Swiper Container -->
+    <div class="swiper products-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="product-card">
+            <div class="product-img">
+              <img src="assets/products/urun.jpg" alt="Geyikli Mangal">
+              <div class="hover-overlay">
+                <button class="fiyat-btn">Fiyat Bilgisi Al</button>
+              </div>
+            </div>
+            <h3>Geyikli Mangal</h3>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="product-card">
+            <div class="product-img">
+              <img src="assets/products/boruprofil.jpg" alt="Boru Profil">
+              <div class="hover-overlay">
+                <button class="fiyat-btn">Fiyat Bilgisi Al</button>
+              </div>
+            </div>
+            <h3>Boru Profil</h3>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="product-card">
+            <div class="product-img">
+              <img src="assets/products/kosebent.jpg" alt="Köşebent">
+              <div class="hover-overlay">
+                <button class="fiyat-btn">Fiyat Bilgisi Al</button>
+              </div>
+            </div>
+            <h3>Köşebent</h3>
+          </div>
+        </div>
+
+        <!-- diğer kartlar buraya -->
+        <div class="swiper-slide">
+          <div class="product-card">
+            <div class="product-img">
+              <img src="assets/products/rulosac.jpg" alt="Rulo Sac">
+              <div class="hover-overlay">
+                <button class="fiyat-btn">Fiyat Bilgisi Al</button>
+              </div>
+            </div>
+            <h3>Rulo Sac</h3>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="product-card">
+            <div class="product-img">
+              <img src="assets/products/trapezsac.jpg" alt="Trapez Sac">
+              <div class="hover-overlay">
+                <button class="fiyat-btn">Fiyat Bilgisi Al</button>
+              </div>
+            </div>
+            <h3>Trapez Sac</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigasyon okları -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <section id="gallery" class="catalog">
-      <h2 id="gallery-header">Galeri</h2>
-      <p class="gallery-intro">
-        Atölyemizden kareler, ürün detayları ve üretim sürecinden bazı anları bu alanda keşfedebilirsiniz.
-      </p>
       <div class="gallery-grid">
-        <!-- Görsel -->
-        <img src="assets/images/post1.jpg" alt="Fotoğraf 1" class="gallery-item" data-category="uretim" />
 
-        <!-- Video -->
-        <video class="gallery-item" data-category="video" muted playsinline>
-          <source src="assets/videos/video1.mp4" type="video/mp4" />
-        </video>
+        <!-- İlk 6 görsel -->
+        <div class="gallery-item-wrapper" data-category="uretim">
+          <img src="assets/images/post1.jpg" alt="Fotoğraf 1" class="gallery-item" />
+          <div class="gallery-caption">Üretimden Bir Kare</div>
+        </div>
+        <div class="gallery-item-wrapper" data-category="atolye">
+          <img src="assets/images/post2.jpg" alt="Fotoğraf 2" class="gallery-item" />
+          <div class="gallery-caption">Atölye Detayı</div>
+        </div>
+        <div class="gallery-item-wrapper" data-category="uretim">
+          <img src="assets/images/post3.jpg" alt="Fotoğraf 3" class="gallery-item" />
+          <div class="gallery-caption">Detaylı Üretim Görseli</div>
+        </div>
+        <div class="gallery-item-wrapper" data-category="atolye">
+          <img src="assets/images/post2.jpg" alt="Fotoğraf 4" class="gallery-item" />
+          <div class="gallery-caption">Çalışma Alanı</div>
+        </div>
+        <div class="gallery-item-wrapper" data-category="uretim">
+          <img src="assets/images/ga3.jpg" alt="Fotoğraf 5" class="gallery-item" />
+          <div class="gallery-caption">Ürün Sergisi</div>
+        </div>
+        <div class="gallery-item-wrapper" data-category="atolye">
+          <img src="assets/images/ga1.jpg" alt="Fotoğraf 6" class="gallery-item" />
+          <div class="gallery-caption">Atölyeden Manzara</div>
+        </div>
 
-        <!-- Başka bir görsel -->
-        <img src="assets/images/post2.jpg" alt="Fotoğraf 2" class="gallery-item" data-category="atolye" />
+        <!-- Geri kalan görseller-->
+        <div class="gallery-item-wrapper hidden" data-category="atolye">
+          <img src="assets/images/ga1.jpg" alt="Fotoğraf 7" class="gallery-item" />
+          <div class="gallery-caption">Atölyeden Bir Kare</div>
+        </div>
+        <div class="gallery-item-wrapper hidden" data-category="uretim">
+          <img src="assets/images/ga3.jpg" alt="Fotoğraf 8" class="gallery-item" />
+          <div class="gallery-caption">Üretim Sonrası</div>
+        </div>
+        <!--Videolar-->
+        <div class="gallery-item-wrapper" data-category="video">
+          <video class="gallery-item" muted playsinline>
+            <source src="assets/videos/video1.mp4" type="video/mp4" />
+          </video>
+          <div class="gallery-caption">Tanıtım Videosu 1</div>
+        </div>
+        <div class="gallery-item-wrapper" data-category="video">
+          <video class="gallery-item" muted playsinline>
+            <source src="assets/videos/video2.mp4" type="video/mp4" />
+          </video>
+          <div class="gallery-caption">Tanıtım Videosu 2</div>
+        </div>
+        <div class="gallery-item-wrapper" data-category="video">
+          <video class="gallery-item" muted playsinline>
+            <source src="assets/videos/video1.mp4" type="video/mp4" />
+          </video>
+          <div class="gallery-caption">Üretim Videosu</div>
+        </div>
+        <div class="gallery-item-wrapper" data-category="video">
+          <video class="gallery-item" muted playsinline>
+            <source src="assets/videos/video2.mp4" type="video/mp4" />
+          </video>
+          <div class="gallery-caption">Detay Videosu</div>
+        </div>
 
-        <!-- Başka bir video -->
-        <video class="gallery-item" data-category="video" muted playsinline>
-          <source src="assets/videos/video2.mp4" type="video/mp4" />
-        </video>
-
-        <!-- Tekrarlar -->
-        <img src="assets/images/post3.jpg" alt="Fotoğraf 3" class="gallery-item" data-category="uretim" />
-
-        <video class="gallery-item" muted playsinline>
-          <source src="assets/videos/video1.mp4" type="video/mp4" />
-        </video>
-
-        <img src="assets/images/post2.jpg" alt="Fotoğraf 4" class="gallery-item" data-category="atolye" />
-        <img src="assets/images/ga3.jpg" alt="Fotoğraf 5" class="gallery-item" data-category="uretim" />
-        <img src="assets/images/ga1.jpg" alt="Fotoğraf 6" class="gallery-item" data-category="atolye" />
-        <img src="assets/images/ga1.jpg" alt="Fotoğraf 4" class="gallery-item" data-category="atolye" />
-        <img src="assets/images/ga3.jpg" alt="Fotoğraf 5" class="gallery-item" data-category="uretim" />
-
-
-        <video class="gallery-item" data-category="video" muted playsinline>
-          <source src="assets/videos/video2.mp4" type="video/mp4" />
-        </video>
       </div>
-      <div class="gallery-filters">
-        <div class="filter-slider"></div> <!-- Animasyonlu kayan kutu -->
+
+      <!-- Daha Fazla Butonu ve Metni -->
+      <div class="gallery-more-section">
+        <p class="gallery-intro">
+          Atölyemizden kareler, ürün detayları ve üretim sürecinden bazı anları bu alanda keşfedebilirsiniz.
+        </p>
+        <p class="gallery-description">Daha fazlasını görmek için butona tıklayın.</p>
+        <button id="show-more-btn" class="show-more">Daha Fazla Göster</button>
+        <button id="show-less-btn" class="show-less" style="display:none;">Daha Az Göster</button>
+      </div>
+      <!-- Filtre Butonları -->
+      <div class="gallery-filters" id="filter-buttons">
+        <div class="filter-slider"></div>
         <button class="filter-btn active" data-filter="all">Tümü</button>
         <button class="filter-btn" data-filter="uretim">Üretim</button>
         <button class="filter-btn" data-filter="atolye">Atölye</button>
         <button class="filter-btn" data-filter="video">Videolar</button>
       </div>
     </section>
+
 
     <!-- Lightbox -->
     <div id="lightbox" class="lightbox hidden">
