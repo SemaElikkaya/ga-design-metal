@@ -80,6 +80,49 @@ function showSlide(index) {
   }, 600);
 }
 
+let autoSlideInterval = setInterval(() => {
+  if (!isTransitioning) {
+    showSlide(currentIndex + 1);
+  }
+}, 3000);
+
+[leftArrow, rightArrow].forEach(arrow => {
+  arrow?.addEventListener("click", () => {
+    clearInterval(autoSlideInterval);
+    autoSlideInterval = setInterval(() => {
+      if (!isTransitioning) {
+        showSlide(currentIndex + 1);
+      }
+    }, 3000);
+  });
+});
+// === Hero Slider Touch/Swipe ===
+let startX = 0;
+let endX = 0;
+
+slidesWrapper.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+});
+
+slidesWrapper.addEventListener("touchmove", (e) => {
+  endX = e.touches[0].clientX;
+});
+
+slidesWrapper.addEventListener("touchend", () => {
+  if (startX && endX) {
+    const diff = startX - endX;
+    if (Math.abs(diff) > 50) { // minimum swipe mesafesi
+      if (diff > 0) {
+        goToNextSlide();
+      } else {
+        goToPreviousSlide();
+      }
+    }
+  }
+  startX = 0;
+  endX = 0;
+});
+
 function goToPreviousSlide() {
   if (!isTransitioning) showSlide(currentIndex - 1);
 }
@@ -134,7 +177,14 @@ document.addEventListener('DOMContentLoaded', () => {
       hamburger.classList.remove('active');
     }
   });
-
+window.addEventListener("scroll", () => {
+  const navLinksContainer = document.getElementById('navLinks');
+  const hamburger = document.getElementById('hamburger');
+  if (navLinksContainer.classList.contains('show')) {
+    navLinksContainer.classList.remove('show');
+    hamburger.classList.remove('active');
+  }
+});
   // Scroll spy: scroll pozisyonuna göre aktif linki güncelle
   window.addEventListener('scroll', () => {
     let scrollPosition = window.scrollY + 400; // Navbar yüksekliği kadar offset
@@ -203,7 +253,7 @@ function updateLightbox(index) {
       video.src = source.src;
       video.controls = true;
       video.autoplay = true;
-      video.muted = false;
+      video.muted = true;
       video.playsInline = true;
       lightboxContent.appendChild(video);
     }
@@ -488,14 +538,83 @@ navLinksForFilterClose.forEach(link => {
 
 new Swiper(".products-swiper", {
   slidesPerView: 3,
-  spaceBetween: 20,
+  spaceBetween: 20, // varsayılan boşluk
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
   },
   breakpoints: {
-    1024: { slidesPerView: 3 },
-    768: { slidesPerView: 2 },
-    0: { slidesPerView: 1.2 }
+    1024: { slidesPerView: 3, spaceBetween: 20 },
+    768: { slidesPerView: 2, spaceBetween: 16 },
+    480: { slidesPerView: 1.5, spaceBetween: 12 },
+    0: { slidesPerView: 1.2, spaceBetween: 12 },
+  },
+});
+
+
+
+// Modal açma
+document.querySelectorAll(".fiyat-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const product = btn.getAttribute("data-product"); // Tıklanan ürün adı
+    const modal = document.getElementById("contactModal");
+    modal.style.display = "flex";
+
+    // Instagram DM butonu
+    const instaBtn = document.getElementById("instaBtn");
+    instaBtn.href = "https://www.instagram.com/ga_designmetal/";
+    instaBtn.onclick = () => {
+      closeContactModal(); // Modal kapanır
+    };
+
+    // Form butonu
+    const formBtn = document.getElementById("formBtn");
+    formBtn.onclick = () => {
+      const konuInput = document.querySelector("input[name='konu']");
+      konuInput.value = `${product} hakkında bilgi almak istiyorum.`;
+      document.getElementById("contact").scrollIntoView({behavior: "smooth"});
+      closeContactModal(); // Modal kapanır
+    };
+  });
+});
+
+// Modal kapama
+function closeContactModal() {
+  document.getElementById("contactModal").style.display = "none";
+}
+
+// Arka plana tıklayınca kapansın
+window.addEventListener("click", (e) => {
+  const modal = document.getElementById("contactModal");
+  if (e.target === modal) {
+    closeContactModal();
   }
 });
+
+const form = document.querySelector("#contactForm"); // Formun id’si
+const sendPopup = document.getElementById("sendPopup");
+
+form.addEventListener("submit", function(e) {
+  e.preventDefault(); // Sayfa reload olmasın
+
+  const formData = new FormData(form);
+
+  fetch(form.action, {
+    method: "POST",
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  }).then(response => {
+    if (response.ok) {
+      // Popup göster
+      sendPopup.classList.add("show");
+      setTimeout(() => sendPopup.classList.remove("show"), 4000); // 4 saniye sonra kaybolur
+      form.reset();
+    } else {
+      alert("Bir hata oluştu, lütfen tekrar deneyin.");
+    }
+  }).catch(error => {
+    alert("Bir hata oluştu, lütfen tekrar deneyin.");
+  });
+});
+
+
