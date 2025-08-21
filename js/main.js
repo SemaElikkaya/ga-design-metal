@@ -1,4 +1,3 @@
-// === Navbar Scroll ile Arka Plan Değiştirme ===
 window.addEventListener("scroll", () => {
   const nav = document.querySelector(".nav-menu");
 
@@ -15,9 +14,7 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// === Aktif Link Takibi ===
 const sections = document.querySelectorAll("section[id]");
-// const navLinks = document.querySelectorAll(".nav-links a");
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -37,7 +34,7 @@ const observer = new IntersectionObserver(entries => {
 
 sections.forEach(section => observer.observe(section));
 
-// === Logo Tıklanınca Aktif Linkleri Sıfırla ===
+
 const logoLink = document.querySelector(".logo-link");
 if (logoLink) {
   logoLink.addEventListener("click", () => {
@@ -45,7 +42,7 @@ if (logoLink) {
   });
 }
 
-// === Hero Slider ===
+
 const slidesWrapper = document.querySelector(".slides-wrapper");
 const slides = document.querySelectorAll(".slide");
 const leftArrow = document.querySelector(".arrow.left");
@@ -96,7 +93,7 @@ let autoSlideInterval = setInterval(() => {
     }, 3000);
   });
 });
-// === Hero Slider Touch/Swipe ===
+
 let startX = 0;
 let endX = 0;
 
@@ -111,7 +108,7 @@ slidesWrapper.addEventListener("touchmove", (e) => {
 slidesWrapper.addEventListener("touchend", () => {
   if (startX && endX) {
     const diff = startX - endX;
-    if (Math.abs(diff) > 50) { // minimum swipe mesafesi
+    if (Math.abs(diff) > 50) { 
       if (diff > 0) {
         goToNextSlide();
       } else {
@@ -135,14 +132,14 @@ leftArrow?.addEventListener("click", goToPreviousSlide);
 rightArrow?.addEventListener("click", goToNextSlide);
 showSlide(currentIndex);
 
-// === Hamburger Menü ===
+
 document.addEventListener('DOMContentLoaded', () => {
   const hamburger = document.getElementById('hamburger');
   const navLinksContainer = document.getElementById('navLinks');
   const navLinks = document.querySelectorAll('#navLinks a');
   const sections = [];
 
-  // Menü linklerine karşılık gelen bölümleri alıyoruz
+
   navLinks.forEach(link => {
     const section = document.querySelector(link.getAttribute('href'));
     if (section) {
@@ -153,14 +150,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Hamburger menü aç/kapa
+
   hamburger?.addEventListener('click', (e) => {
     e.stopPropagation();
     navLinksContainer.classList.toggle('show');
     hamburger.classList.toggle('active');
   });
 
-  // Menüdeki linklere tıklanınca menü kapanır ve aktif link güncellenir
+
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
       navLinksContainer.classList.remove('show');
@@ -170,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Menü dışına tıklanınca menü kapanır
+
   document.addEventListener('click', (e) => {
     if (!hamburger.contains(e.target) && !navLinksContainer.contains(e.target)) {
       navLinksContainer.classList.remove('show');
@@ -185,9 +182,9 @@ window.addEventListener("scroll", () => {
     hamburger.classList.remove('active');
   }
 });
-  // Scroll spy: scroll pozisyonuna göre aktif linki güncelle
+
   window.addEventListener('scroll', () => {
-    let scrollPosition = window.scrollY + 400; // Navbar yüksekliği kadar offset
+    let scrollPosition = window.scrollY + 400; 
 
     for (let i = sections.length - 1; i >= 0; i--) {
       const secTop = sections[i].section.offsetTop;
@@ -203,7 +200,6 @@ window.addEventListener("scroll", () => {
   });
 });
 
-// === Galeri Lightbox + Oklarla Geçiş ===
 const items = Array.from(document.querySelectorAll('.gallery-item-wrapper'));
 const lightbox = document.getElementById('lightbox');
 const lightboxContent = document.querySelector('.lightbox-content');
@@ -216,7 +212,6 @@ let currentMediaIndex = -1;
 function getVisibleItems() {
   return items.filter(item => {
     if (item.style.display === 'none') return false;
-    // Eğer filtre "all" ise sadece img içerenleri al
     const activeFilterBtn = document.querySelector('.filter-btn.active');
     if (!activeFilterBtn) return true;
     const filter = activeFilterBtn.getAttribute('data-filter');
@@ -226,7 +221,6 @@ function getVisibleItems() {
     if (filter === 'all' && media.tagName !== 'IMG') {
       return false;
     }
-    // Diğer filtrelerde normal davranış
     return true;
   });
 }
@@ -263,10 +257,10 @@ function updateLightbox(index) {
   rightBtn.classList.toggle('hidden', index === visibleItems.length - 1);
 }
 
-// Wrapperlar için tıklama event'i:
+
 items.forEach((item, i) => {
   item.addEventListener('click', () => {
-    visibleItems = getVisibleItems(); // o an görünür olanları al
+    visibleItems = getVisibleItems(); 
     const visibleIndex = visibleItems.indexOf(item);
 
     if (visibleIndex === -1) return;
@@ -304,9 +298,9 @@ rightBtn?.addEventListener('click', (e) => {
 
 visibleItems = getVisibleItems();
 
-// === Filtreleme ve Slider ===
+
 const filterBtns = document.querySelectorAll('.filter-btn');
-const galleryItems = document.querySelectorAll('.gallery-item-wrapper'); // sadece wrapper'lar
+const galleryItems = document.querySelectorAll('.gallery-item-wrapper'); 
 const slider = document.querySelector('.filter-slider');
 
 function moveSlider(button) {
@@ -316,7 +310,6 @@ function moveSlider(button) {
   slider.style.width = rect.width + 'px';
 }
 
-// Sayfa yüklendiğinde Tümü filtresi aktif, sadece görseller gösterilir
 window.addEventListener('DOMContentLoaded', () => {
   filterBtns.forEach(b => b.classList.remove('active'));
   const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
@@ -374,56 +367,20 @@ filterBtns.forEach(btn => {
   });
 });
 
-// === Buton Görünürlüğü: Galeri & İletişim Section ===
 const filterBtnsContainer = document.querySelector('.gallery-filters');
 const gallerySection = document.getElementById('gallery');
 const contactSection = document.getElementById('contact');
 
-const navbarHeight = 74.5; // navbar yüksekliği
+const navbarHeight = 74.5;
 
 let galleryVisible = false;
 let contactVisible = false;
-
-// function updateButtonVisibility() {
-//   if (galleryVisible && !contactVisible) {
-//     filterBtnsContainer.classList.add('visible');
-//   } else {
-//     filterBtnsContainer.classList.remove('visible');
-//   }
-// }
-// silmelisin
-
-// const galleryObserver = new IntersectionObserver((entries) => {
-//   entries.forEach(entry => {
-//     galleryVisible = entry.isIntersecting;
-//     updateButtonVisibility();
-//   });
-// }, {
-//   root: null,
-//   rootMargin: `-${navbarHeight}px 0px 0px 0px`,
-//   threshold: 0.1,
-// });
-
-// const contactObserver = new IntersectionObserver((entries) => {
-//   entries.forEach(entry => {
-//     contactVisible = entry.isIntersecting;
-//     updateButtonVisibility();
-//   });
-// }, {
-//   root: null,
-//   threshold: 0.1,
-// });
-
-// if (gallerySection) galleryObserver.observe(gallerySection);
-// if (contactSection) contactObserver.observe(contactSection);
 
 window.addEventListener('resize', () => {
   const activeBtn = document.querySelector('.filter-btn.active');
   if (activeBtn) moveSlider(activeBtn);
 });
 
-
-// === "Daha Fazla" ve "Daha Az" Butonları ===
 const showMoreBtn = document.getElementById('show-more-btn');
 const showLessBtn = document.getElementById('show-less-btn');
 const filterButtons = document.getElementById('filter-buttons');
@@ -432,16 +389,16 @@ const descriptionText = document.querySelector('.gallery-description');
 showMoreBtn.addEventListener('click', () => {
   const hiddenItems = document.querySelectorAll('.gallery-item-wrapper.hidden');
   hiddenItems.forEach(item => {
-    item.classList.remove('hidden'); // Tümünü kaldır — video dahil
+    item.classList.remove('hidden'); 
   });
 
-  filterButtons.classList.add('visible'); // SADECE burada görünür
+  filterButtons.classList.add('visible'); 
 
   if (descriptionText) {
     descriptionText.textContent = 'Daha az görmek için butona tıklayın.';
   }
 
-  // 'Tümü' butonunu aktif hale getir ve slider'ı kaydır
+
   filterBtns.forEach(btn => btn.classList.remove('active'));
   const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
   if (allBtn) {
@@ -449,13 +406,12 @@ showMoreBtn.addEventListener('click', () => {
     moveSlider(allBtn);
   }
 
-  // 'Tümü' filtre davranışı (videolar hariç göster)
   galleryItems.forEach(item => {
     const media = item.querySelector('.gallery-item');
     if (media && media.tagName === 'IMG') {
       item.style.display = 'block';
     } else {
-      item.style.display = 'none'; // videoları filtrelemede gizli tut
+      item.style.display = 'none'; 
     }
   });
 
@@ -476,8 +432,6 @@ showLessBtn.addEventListener('click', () => {
   });
 
   filterButtons.classList.remove('visible');
-
-  // Tümü filtresini aktif hale getir
   filterBtns.forEach(btn => btn.classList.remove('active'));
   const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
   if (allBtn) {
@@ -514,7 +468,6 @@ function resetGalleryView() {
   }
 }
 
-// === Scroll ile Galeriden Çıkınca Her Şeyi Sıfırla ===
 window.addEventListener('scroll', () => {
   if (!filterButtons.classList.contains('visible')) return;
 
@@ -526,7 +479,6 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// === Navbar Linklerine ve Logoya Tıklanınca Her Şeyi Sıfırla ===
 const navLinksForFilterClose = document.querySelectorAll('nav a, .logo');
 navLinksForFilterClose.forEach(link => {
   link.addEventListener('click', () => {
@@ -538,7 +490,7 @@ navLinksForFilterClose.forEach(link => {
 
 new Swiper(".products-swiper", {
   slidesPerView: 3,
-  spaceBetween: 20, // varsayılan boşluk
+  spaceBetween: 20, 
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
@@ -551,39 +503,33 @@ new Swiper(".products-swiper", {
   },
 });
 
-
-
-// Modal açma
 document.querySelectorAll(".fiyat-btn").forEach(btn => {
   btn.addEventListener("click", () => {
-    const product = btn.getAttribute("data-product"); // Tıklanan ürün adı
+    const product = btn.getAttribute("data-product"); 
     const modal = document.getElementById("contactModal");
     modal.style.display = "flex";
 
-    // Instagram DM butonu
+
     const instaBtn = document.getElementById("instaBtn");
     instaBtn.href = "https://www.instagram.com/ga_designmetal/";
     instaBtn.onclick = () => {
-      closeContactModal(); // Modal kapanır
+      closeContactModal(); 
     };
 
-    // Form butonu
     const formBtn = document.getElementById("formBtn");
     formBtn.onclick = () => {
       const konuInput = document.querySelector("input[name='konu']");
       konuInput.value = `${product} hakkında bilgi almak istiyorum.`;
       document.getElementById("contact").scrollIntoView({behavior: "smooth"});
-      closeContactModal(); // Modal kapanır
+      closeContactModal(); 
     };
   });
 });
 
-// Modal kapama
 function closeContactModal() {
   document.getElementById("contactModal").style.display = "none";
 }
 
-// Arka plana tıklayınca kapansın
 window.addEventListener("click", (e) => {
   const modal = document.getElementById("contactModal");
   if (e.target === modal) {
@@ -591,11 +537,11 @@ window.addEventListener("click", (e) => {
   }
 });
 
-const form = document.querySelector("#contactForm"); // Formun id’si
+const form = document.querySelector("#contactForm"); 
 const sendPopup = document.getElementById("sendPopup");
 
 form.addEventListener("submit", function(e) {
-  e.preventDefault(); // Sayfa reload olmasın
+  e.preventDefault(); 
 
   const formData = new FormData(form);
 
@@ -607,7 +553,7 @@ form.addEventListener("submit", function(e) {
     if (response.ok) {
       // Popup göster
       sendPopup.classList.add("show");
-      setTimeout(() => sendPopup.classList.remove("show"), 4000); // 4 saniye sonra kaybolur
+      setTimeout(() => sendPopup.classList.remove("show"), 4000); 
       form.reset();
     } else {
       alert("Bir hata oluştu, lütfen tekrar deneyin.");

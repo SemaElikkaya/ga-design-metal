@@ -1,4 +1,3 @@
-/* === Renk Paleti (Yeni) === */
 :root {
   --text-main: #1F1F1F;
   --text-muted: #6B6B6B;
@@ -10,7 +9,6 @@
   --bg-section: #7b7b7b6e;
 }
 
-/* Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -29,7 +27,6 @@ body {
   line-height: 1.6;
 }
 
-/* === NAVIGATION === */
 .nav-menu {
   position: fixed;
   top: 0;
@@ -79,7 +76,6 @@ body {
   border-bottom: 2px solid #1F1F1F;
 }
 
-/* === Hamburger === */
 .hamburger-wrapper {
   display: none;
   flex-direction: row;
@@ -119,7 +115,6 @@ body {
   transition: all 0.3s ease;
 }
 
-/* === Responsive Menü === */
 @media (max-width: 768px) {
   .nav-links {
     position: absolute;
@@ -152,7 +147,6 @@ body {
   }
 }
 
-/* === HERO SECTION === */
 #hero-section {
   width: 100%;
   background-size: cover;
@@ -199,7 +193,6 @@ body {
   opacity: 1;
 }
 
-/* Slider overlay */
 .slider-overlay {
   position: absolute;
   bottom: 8%;
@@ -233,7 +226,6 @@ body {
   }
 }
 
-/* === Responsive Hero === */
 @media (max-width: 1024px) {
   .slider-overlay {
     font-size: 1.1rem;
@@ -277,7 +269,6 @@ body {
   }
 }
 
-/* === OK BUTONLARI === */
 .arrow {
   position: absolute;
   top: 50%;
@@ -306,7 +297,6 @@ body {
   right: 20px;
 }
 
-/* === ANA İÇERİK === */
 main {
   margin: 0 auto;
 }
@@ -334,7 +324,6 @@ main section p {
   line-height: 1.6;
 }
 
-/* === About Section Responsive Ayarları (Tekrarlar Temizlendi) === */
 .about-section {
   background: var(--bg-section);
   color: var(--text-main);
@@ -410,7 +399,6 @@ main section p {
   transform: scale(1.04);
 }
 
-/* Responsive About Section */
 @media (max-width: 1100px) {
   .about-inner {
     grid-template-columns: 1fr 440px;
@@ -493,16 +481,11 @@ main section p {
   }
 }
 
-/* ...devamı aynı şekilde diğer bölümler için tekrarları kaldırarak devam edebilir... */
-
-/* Products Section */
 .products-section {
   padding: 50px 5%;
   text-align: center;
 }
 
-
-/* Info Pads */
 .urun-info-pads {
   display: flex;
   gap: 20px;
@@ -521,10 +504,8 @@ main section p {
   justify-content: center;
   align-items: center;
   height: 250px;
-  /* Önce 220px idi, düşürdük */
   text-align: center;
   aspect-ratio: 1 / 1;
-  /* Kare görünüm */
 }
 
 .info-pad:hover {
@@ -543,7 +524,6 @@ main section p {
   font-size: 0.95rem;
 }
 
-/* Swiper Arrows */
 .swiper-button-next,
 .swiper-button-prev {
   color: #ffffff;
@@ -556,7 +536,6 @@ main section p {
   font-weight: bold;
 }
 
-/* Product Card */
 .product-card {
   background: #fff;
   border-radius: 16px;
@@ -567,7 +546,6 @@ main section p {
   flex-direction: column;
   justify-content: flex-start;
   aspect-ratio: 1 / 1;
-  /* Kare */
 }
 
 .product-card:hover {
@@ -633,7 +611,6 @@ main section p {
   cursor: pointer;
 }
 
-/* Responsive - Tablet */
 @media (max-width: 1024px) {
   .urun-info-pads {
     gap: 12px;
@@ -646,11 +623,9 @@ main section p {
     border-radius: 10px;
     word-break: break-word;
     overflow-wrap: break-word;
-    /* Uzun yazılar taşmasın */
   }
 }
 
-/* Responsive - Mobil */
 @media (max-width: 768px) {
   .urun-info-pads {
     flex-direction: column;
@@ -658,8 +633,6 @@ main section p {
   }
 
   .info-pad {
-    /* min-height: 40px;
-    height: 40px; */
     aspect-ratio: 1 / 1;
     padding: 4px;
     font-size: 0.75rem;
@@ -672,7 +645,6 @@ main section p {
   .swiper-wrapper {
     display: flex;
     gap: 16px;
-    /* Kartlar arası boşluk */
   }
 
   .swiper-slide {
@@ -691,7 +663,6 @@ main section p {
   }
 }
 
-/* Responsive - Küçük Mobil */
 @media (max-width: 480px) {
   .products-section {
     padding: 30px 2%;
@@ -727,10 +698,8 @@ main section p {
 }
 
 .gallery-grid {
-  /* flex: 1 1 65%; */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* gap: 10px; */
 }
 
 
@@ -760,12 +729,6 @@ main section p {
 .gallery-item-wrapper:hover::after {
   opacity: 1;
 }
-
-/* .gallery-item.hide {
-  opacity: 0;
-  transform: scale(0.9);
-  pointer-events: none;
-} */
 
 .gallery-filters {
   display: none;
@@ -799,12 +762,10 @@ main section p {
   user-select: none;
   transition: color 0.3s ease;
   display: inline-block;
-  /* veya block */
 }
 
 .filter-btn.active {
   color: white;
-  /* Aktif buton yazısı beyaz */
   font-weight: 700;
 }
 
@@ -812,16 +773,13 @@ main section p {
   display: grid;
 }
 
-/* Kayan siyah bant */
 .filter-slider {
   position: absolute;
-  /* bottom: 0; */
   height: 40px;
   background: black;
   border-radius: 4px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1;
-  /* Yazıların altında */
   will-change: left, width;
 }
 
@@ -832,7 +790,6 @@ main section p {
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--text-muted);
-  /* max-width: 700px; */
   margin: 0 auto 2rem auto;
   line-height: 1.6;
 }
@@ -877,17 +834,14 @@ main section p {
 
 .gallery-grid>* {
   overflow: hidden;
-  /* border-radius: 8px; */
   cursor: pointer;
 }
 
-/* Galeri öğeleri (img ve video) için genel stil) */
 .gallery-grid img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  /* border-radius: 12px; */
 }
 
 .gallery-grid video {
@@ -935,17 +889,14 @@ main section p {
   }
 }
 
-/* Galeri öğesi (container) */
 .gallery-item-wrapper {
   position: relative;
   overflow: hidden;
-  /* border-radius: 10px; */
   cursor: pointer;
   height: 250px;
   transition: transform 0.3s ease;
 }
 
-/* Caption tam ortada */
 .gallery-caption {
   position: absolute;
   top: 50%;
@@ -964,7 +915,6 @@ main section p {
   opacity: 1;
 }
 
-/* Başta gizli olanlar */
 .gallery-item-wrapper.hidden {
   display: none;
 }
@@ -1015,7 +965,6 @@ main section p {
   background: #333;
 }
 
-/* === Lightbox === */
 .lightbox {
   position: fixed;
   top: 0;
@@ -1107,11 +1056,6 @@ main section p {
 .contact-form {
   flex: 1;
   min-width: 300px;
-  /* background-color: #3A3A3A; */
-  /* padding: 2rem; */
-  /* border-radius: 12px; */
-  /* box-shadow: 0 0 25px rgba(0, 0, 0, 0.2); */
-  /* transition: all 0.3s ease-in-out; */
 }
 
 .contact-form h2 {
@@ -1226,7 +1170,6 @@ main section p {
 
 .insta-btn {
   background: #C13584;
-  /* Instagram rengi */
 }
 
 .insta-btn:hover {
@@ -1235,7 +1178,6 @@ main section p {
 
 .contact-btn {
   background: #CBA135;
-  /* Senin paletinden altın ton */
 }
 
 .contact-btn:hover {
@@ -1277,19 +1219,16 @@ main section p {
 .contact-item p {
   margin: 0;
   color: var(--text-muted);
-  /* istediğin renk */
   font-size: 1.1rem;
-  /* mevcut font boyutu ile eşleşir */
 }
 
 .contact-item a {
-  font-size: 26px;
+  font-size: 1.1rem;
   color: var(--accent);
   transition: transform 0.3s ease, color 0.3s ease;
   -webkit-text-decoration-color: transparent;
   -webkit-tap-highlight-color: transparent;
   text-decoration: none;
-  color: inherit;
 }
 
 .contact-item a:hover {
@@ -1354,11 +1293,8 @@ main section p {
   }
 }
 
-
-/* === FOOTER === */
 footer {
   background-color: #262626;
-  /* daha da koyu gri, uyumlu */
   text-align: center;
   padding: 0.5rem;
   font-size: 0.9rem;
