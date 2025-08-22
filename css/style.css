@@ -486,14 +486,24 @@ main section p {
   text-align: center;
 }
 
+
 .urun-info-pads {
   display: flex;
+  justify-content: center; 
+  align-items: center;     
   gap: 20px;
   margin-top: 30px;
 }
 
+.urun-info-pads.top-info {
+  margin-bottom: 40px;
+}
+
+.urun-info-pads.bottom-info {
+  margin-top: 40px;
+}
+
 .info-pad {
-  flex: 1;
   background: var(--bg-section);
   padding: 16px;
   border-radius: 12px;
@@ -503,9 +513,9 @@ main section p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 250px;
+  height: 10rem;
+  width: 100%;
   text-align: center;
-  aspect-ratio: 1 / 1;
 }
 
 .info-pad:hover {
@@ -535,6 +545,11 @@ main section p {
   font-size: 24px;
   font-weight: bold;
 }
+
+.products-swiper {
+  padding-right: 20px;
+}
+
 
 .product-card {
   background: #fff;
@@ -611,6 +626,58 @@ main section p {
   cursor: pointer;
 }
 
+.makine-gallery {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 4rem;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.makine-item {
+  flex: 1 1 30%;
+  max-width: 30rem;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  aspect-ratio: 1/1;
+}
+
+.makine-item img {
+  width: 100%;
+  height: 90%;
+  object-fit: cover;
+  display: block;
+}
+
+.makine-item:hover {
+  transform: translateY(-5px) scale(1.03);
+}
+
+.makine-caption {
+  background-color: #fff;
+  padding-bottom: 1rem;
+  text-align: center;
+  
+}
+
+.makine-caption p {
+  margin: 0;
+  color:var(--text-main);
+  font-size: 1rem;
+}
+
+
+@media (max-width: 768px) {
+  .makine-caption {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+}
+
+
+
 @media (max-width: 1024px) {
   .urun-info-pads {
     gap: 12px;
@@ -625,6 +692,7 @@ main section p {
     overflow-wrap: break-word;
   }
 }
+
 
 @media (max-width: 768px) {
   .urun-info-pads {
@@ -661,6 +729,16 @@ main section p {
   .swiper-button-prev {
     display: none !important;
   }
+
+  .makine-gallery {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .makine-item {
+    max-width: 100%;
+    height: 200px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -689,6 +767,7 @@ main section p {
     padding: 8px;
   }
 }
+
 
 #gallery {
   display: flex;

@@ -1,3 +1,8 @@
+window.addEventListener("load", () => {
+  window.scrollTo(0, 0);
+  history.replaceState(null, "", window.location.pathname); // hash'i temizle
+});
+
 window.addEventListener("scroll", () => {
   const nav = document.querySelector(".nav-menu");
 
@@ -108,7 +113,7 @@ slidesWrapper.addEventListener("touchmove", (e) => {
 slidesWrapper.addEventListener("touchend", () => {
   if (startX && endX) {
     const diff = startX - endX;
-    if (Math.abs(diff) > 50) { 
+    if (Math.abs(diff) > 50) {
       if (diff > 0) {
         goToNextSlide();
       } else {
@@ -138,7 +143,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinksContainer = document.getElementById('navLinks');
   const navLinks = document.querySelectorAll('#navLinks a');
   const sections = [];
-
+  const logoLink = document.querySelector('.logo-link');
+  if (logoLink) {
+    logoLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      history.replaceState(null, "", window.location.pathname); // hash'i temizle
+      const navLinks = document.querySelectorAll('.nav-links a');
+      navLinks.forEach(link => link.classList.remove('active'));
+    });
+  }
 
   navLinks.forEach(link => {
     const section = document.querySelector(link.getAttribute('href'));
@@ -174,17 +188,17 @@ document.addEventListener('DOMContentLoaded', () => {
       hamburger.classList.remove('active');
     }
   });
-window.addEventListener("scroll", () => {
-  const navLinksContainer = document.getElementById('navLinks');
-  const hamburger = document.getElementById('hamburger');
-  if (navLinksContainer.classList.contains('show')) {
-    navLinksContainer.classList.remove('show');
-    hamburger.classList.remove('active');
-  }
-});
+  window.addEventListener("scroll", () => {
+    const navLinksContainer = document.getElementById('navLinks');
+    const hamburger = document.getElementById('hamburger');
+    if (navLinksContainer.classList.contains('show')) {
+      navLinksContainer.classList.remove('show');
+      hamburger.classList.remove('active');
+    }
+  });
 
   window.addEventListener('scroll', () => {
-    let scrollPosition = window.scrollY + 400; 
+    let scrollPosition = window.scrollY + 400;
 
     for (let i = sections.length - 1; i >= 0; i--) {
       const secTop = sections[i].section.offsetTop;
@@ -260,7 +274,7 @@ function updateLightbox(index) {
 
 items.forEach((item, i) => {
   item.addEventListener('click', () => {
-    visibleItems = getVisibleItems(); 
+    visibleItems = getVisibleItems();
     const visibleIndex = visibleItems.indexOf(item);
 
     if (visibleIndex === -1) return;
@@ -300,7 +314,7 @@ visibleItems = getVisibleItems();
 
 
 const filterBtns = document.querySelectorAll('.filter-btn');
-const galleryItems = document.querySelectorAll('.gallery-item-wrapper'); 
+const galleryItems = document.querySelectorAll('.gallery-item-wrapper');
 const slider = document.querySelector('.filter-slider');
 
 function moveSlider(button) {
@@ -389,10 +403,10 @@ const descriptionText = document.querySelector('.gallery-description');
 showMoreBtn.addEventListener('click', () => {
   const hiddenItems = document.querySelectorAll('.gallery-item-wrapper.hidden');
   hiddenItems.forEach(item => {
-    item.classList.remove('hidden'); 
+    item.classList.remove('hidden');
   });
 
-  filterButtons.classList.add('visible'); 
+  filterButtons.classList.add('visible');
 
   if (descriptionText) {
     descriptionText.textContent = 'Daha az görmek için butona tıklayın.';
@@ -411,7 +425,7 @@ showMoreBtn.addEventListener('click', () => {
     if (media && media.tagName === 'IMG') {
       item.style.display = 'block';
     } else {
-      item.style.display = 'none'; 
+      item.style.display = 'none';
     }
   });
 
@@ -489,23 +503,22 @@ navLinksForFilterClose.forEach(link => {
 });
 
 new Swiper(".products-swiper", {
-  slidesPerView: 3,
-  spaceBetween: 20, 
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
+  slidesPerView: "auto",
+  spaceBetween: 16,
+  centeredSlides: false,
+  loop: false,
+  // mobilde kenarda boşluk bırak
   breakpoints: {
-    1024: { slidesPerView: 3, spaceBetween: 20 },
-    768: { slidesPerView: 2, spaceBetween: 16 },
-    480: { slidesPerView: 1.5, spaceBetween: 12 },
-    0: { slidesPerView: 1.2, spaceBetween: 12 },
-  },
+    0: { slidesPerView: 1.1, spaceBetween: 12 },
+    480: { slidesPerView: 1.3, spaceBetween: 14 },
+    768: { slidesPerView: 2.5, spaceBetween: 16 },
+    1024: { slidesPerView: 3, spaceBetween: 20 }
+  }
 });
 
 document.querySelectorAll(".fiyat-btn").forEach(btn => {
   btn.addEventListener("click", () => {
-    const product = btn.getAttribute("data-product"); 
+    const product = btn.getAttribute("data-product");
     const modal = document.getElementById("contactModal");
     modal.style.display = "flex";
 
@@ -513,15 +526,15 @@ document.querySelectorAll(".fiyat-btn").forEach(btn => {
     const instaBtn = document.getElementById("instaBtn");
     instaBtn.href = "https://www.instagram.com/ga_designmetal/";
     instaBtn.onclick = () => {
-      closeContactModal(); 
+      closeContactModal();
     };
 
     const formBtn = document.getElementById("formBtn");
     formBtn.onclick = () => {
       const konuInput = document.querySelector("input[name='konu']");
       konuInput.value = `${product} hakkında bilgi almak istiyorum.`;
-      document.getElementById("contact").scrollIntoView({behavior: "smooth"});
-      closeContactModal(); 
+      document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+      closeContactModal();
     };
   });
 });
@@ -537,11 +550,11 @@ window.addEventListener("click", (e) => {
   }
 });
 
-const form = document.querySelector("#contactForm"); 
+const form = document.querySelector("#contactForm");
 const sendPopup = document.getElementById("sendPopup");
 
-form.addEventListener("submit", function(e) {
-  e.preventDefault(); 
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
 
   const formData = new FormData(form);
 
@@ -553,7 +566,7 @@ form.addEventListener("submit", function(e) {
     if (response.ok) {
       // Popup göster
       sendPopup.classList.add("show");
-      setTimeout(() => sendPopup.classList.remove("show"), 4000); 
+      setTimeout(() => sendPopup.classList.remove("show"), 4000);
       form.reset();
     } else {
       alert("Bir hata oluştu, lütfen tekrar deneyin.");
